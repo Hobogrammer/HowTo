@@ -4,8 +4,12 @@ feature "As a site owner I want to be able to edit a list name so I can correct 
   scenario "viewing the list index" do
     visit root_path
 
+    click_on "Edit"
 
-    page.must_have_content "Hello World"
-    page.wont_have_content "Goobye All!"
+    fill_in "Name", with: "Something Random"
+
+    click_on "Update List"
+
+    page.must_have_content "Something Random"
   end
 end

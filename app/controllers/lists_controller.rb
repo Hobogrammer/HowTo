@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+before_action :set_list, only: [ :show, :edit, :update, :destroy]
 
   def index
     @lists = List.all
@@ -13,12 +14,31 @@ class ListsController < ApplicationController
     if @list.save
       redirect_to list_path(@list), notice: "List successfully created"
     else
-      render :new
+      render 'new'
     end
   end
 
   def show
-    @list = List.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @list.update_attributes(list_params)
+      redirect_to list_path(@list), notice: "List was successfully updated"
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    if @list.destroy
+      redirect_to root_path, notice: "List deleted"
+    else
+      flash[:error] = "Project could not be deleted"
+      redirect_to root_path
+    end
   end
 
   private
@@ -26,4 +46,9 @@ class ListsController < ApplicationController
   def list_params
     params.require(:list).permit(:name)
   end
+
+  def set_list
+    @list = List.find(params[:id])
+  end
+
 end
