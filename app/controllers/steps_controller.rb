@@ -1,5 +1,6 @@
 class StepsController < ApplicationController
-  before_action :load_list, only: [ :new, :create, :edit, :update]
+  before_action :load_list, only: [ :new, :create, :edit, :update, :destroy]
+  before_action :set_step, only: [:edit, :update, :destroy]
 
   def new
     @step = @list.steps.build
@@ -15,11 +16,9 @@ class StepsController < ApplicationController
   end
 
   def edit
-    @step = @list.steps.find_by(id: params[:id])
   end
 
   def update
-    @step = @list.steps.find_by(id: params[:id])
     if @step.update_attributes(step_params)
       redirect_to list_path(@list)
     else
@@ -27,10 +26,22 @@ class StepsController < ApplicationController
     end
   end
 
+  def destroy
+    if @step.destroy
+      redirect_to list_path(@list), notice: "Step deleted"
+    else
+      redirect_to list_path, notice: "Step could not be deleted"
+    end
+  end
+
   private
 
   def load_list
     @list = List.find(params[:list_id])
+  end
+
+  def set_step
+    @step = @list.steps.find_by(id: params[:id])
   end
 
   def step_params
