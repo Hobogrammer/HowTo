@@ -1,5 +1,10 @@
 <h2>List</h2>
 
 Name: <%= @list.name %>
+<ol>
+  <% @steps.each do |step|  %>
+    <li><%= step.content %> <%= link_to 'Edit', edit_list_step_path(@list,step) %> | <%= link_to 'Destroy',[@list,step], method: :delete, data: { confirm: 'Are you sure?'} %></li>
+  <% end %>
+</ol>
 
-<%= link_to "Add A Step",  new_list_step_path(@list) %>
+<%= link_to "Add A Step",  new_list_step_path(@list.id) %>

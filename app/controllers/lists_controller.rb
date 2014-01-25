@@ -19,6 +19,7 @@ before_action :set_list, only: [ :show, :edit, :update, :destroy]
   end
 
   def show
+    @steps = @list.steps
   end
 
   def edit

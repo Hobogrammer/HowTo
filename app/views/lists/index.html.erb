@@ -4,7 +4,7 @@
   <div class="list" id="<%= dom_id(list) %>">
     <h3><%= list.name %></h3>
     <div class="nav">
-      <%= link_to 'Edit', edit_list_path(list) %> | <%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?'} %>
+      <%= link_to 'Edit', edit_list_path(list) %> | <%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?'} %>
     </div>
   </div>
 <% end %>
