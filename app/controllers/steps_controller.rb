@@ -1,6 +1,6 @@
 class StepsController < ApplicationController
-  before_action :load_list, only: [ :new, :create, :edit, :update, :destroy]
-  before_action :set_step, only: [:edit, :update, :destroy]
+  before_action :load_list, only: [ :new, :create, :edit, :update, :destroy,:show ]
+  before_action :set_step, only: [:edit, :update, :destroy, :show]
 
   def new
     @step = @list.steps.build
@@ -34,6 +34,9 @@ class StepsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
   def load_list
@@ -41,7 +44,7 @@ class StepsController < ApplicationController
   end
 
   def set_step
-    @step = @list.steps.find_by(id: params[:id])
+    @step = @list.steps.find(params[:id])
   end
 
   def step_params

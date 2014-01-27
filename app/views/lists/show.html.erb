@@ -3,7 +3,7 @@
 Name: <%= @list.name %>
 <ol>
   <% @steps.each do |step|  %>
-    <li><%= step.content %> <%= link_to 'Edit', edit_list_step_path(@list,step) %> | <%= link_to 'Destroy',[@list,step], method: :delete, data: { confirm: 'Are you sure?'} %></li>
+    <li><%= link_to step.content, list_step_path(@list,step) %> <%= link_to 'Edit', edit_list_step_path(@list,step) %> | <%= link_to 'Destroy',[@list,step], method: :delete, data: { confirm: 'Are you sure?'} %></li>
   <% end %>
 </ol>
 
