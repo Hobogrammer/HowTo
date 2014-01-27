@@ -3,7 +3,7 @@
 
 <ol>
 <% @lists.each do |list| %>
-    <li><%= list.name %></li>
+    <li><%= link_to list.name, list_path(list) %></li>
     <div class="nav">
       <%= link_to 'Edit', edit_list_path(list) %> | <%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?'} %>
     </div>
